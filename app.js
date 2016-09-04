@@ -23,7 +23,7 @@ db.run('CREATE TABLE IF NOT EXISTS messages (author TEXT, bodytext TEXT, date TE
 });
 
 var insertMessageToDB = function(message){
-	var stmt = db.prepare('INSERT INTO messages VALUES(?, ?, ?)');
+  var stmt = db.prepare('INSERT INTO messages VALUES(?, ?, ?)');
   stmt.run(message.author, message.bodytext, message.date);
 	stmt.finalize();
 	console.log('[insertMessageToDB completed]');

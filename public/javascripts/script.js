@@ -14,10 +14,13 @@ function login() {
 
 function postButtonPressed() {
 	var body = $('#post_bodytext').val();
-	var options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute:'2-digit', hour12:'true' };
-  var date = new Date().toLocaleString('en-US', options);
-	$('#post_bodytext').val('');
-	socket.emit('message_sent', {bodytext: body, date : date});
+  if ($.trim(body)) {
+    // bodytext is not empty nor contains only whitespace
+    var options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute:'2-digit', hour12:'true' };
+    var date = new Date().toLocaleString('en-US', options);
+    $('#post_bodytext').val('');
+  	socket.emit('message_sent', {bodytext: body, date : date});
+  }
 }
 
 function logout(){
