@@ -25,15 +25,15 @@ db.run('CREATE TABLE IF NOT EXISTS messages (author TEXT, bodytext TEXT, date TE
 var insertMessageToDB = function(message){
   var stmt = db.prepare('INSERT INTO messages VALUES(?, ?, ?)');
   stmt.run(message.author, message.bodytext, message.date);
-	stmt.finalize();
-	console.log('[insertMessageToDB completed]');
+  stmt.finalize();
+  console.log('[insertMessageToDB completed]');
 }
 
 var fetchMessagesFromDB = function(client){
-	db.each('SELECT * FROM messages', function (err, row) {
-      		client.emit('message_received', row);
-        });
-	console.log('[fetchMessagesFromDB completed]');
+  db.each('SELECT * FROM messages', function (err, row) {
+    client.emit('message_received', row);
+  });
+  console.log('[fetchMessagesFromDB completed]');
 }
 
 
